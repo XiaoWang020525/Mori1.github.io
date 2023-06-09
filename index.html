@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://webapi.amap.com/maps?v=1.4.15&key=9e6fe57f07f8cfb1f7a35b2a318cadf6"></script>
+</head>
+<body>
+<div id="mapContainer" style="width: 100%; height: 100%;">
+</div>
+</body>
+</html>
+<script>
+  //初始化地图
+  // 初始化地图和标记
+  var map = new AMap.Map('mapContainer', {
+    zoom: 13,
+    center: [116.397428, 39.90923]
+  });
+  var marker = null; // 标记对象
 
+  // 添加点击事件监听
+  map.on('click', function (e) {
+    var lnglat = e.lnglat;
+    //输出经纬度
+    console.log('经纬度：' + lnglat.getLng() + ',' + lnglat.getLat());
+
+    // 检查是否已经存在标记
+    if (marker) {
+      // 如果已存在标记，则移除标记
+      marker.setMap(null);
+      marker = null;
+    } else {
+      // 如果不存在标记，则添加标记
+      marker = new AMap.Marker({
+        position: lnglat,
+        map: map
+      });
+    }
+  });
+</script>
